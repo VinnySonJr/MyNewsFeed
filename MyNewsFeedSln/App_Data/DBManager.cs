@@ -140,14 +140,14 @@ namespace MyNewsFeedSln.App_Data
             {
                 Article aArticle = new Article
                 {
-                    id = (string)article["source"]["id"],
-                    name = (string)article["source"]["name"],
-                    author = (string)article["author"],
-                    title = (string)article["title"],
-                    description = (string)article["description"],
-                    url = (string)article["url"],
-                    urlImage = (string)article["urlToImage"],
-                    publishedAt = (string)article["publishedAt"]
+                    Id = (string)article["source"]["id"],
+                    Name = (string)article["source"]["name"],
+                    Author = (string)article["author"],
+                    Title = (string)article["title"],
+                    Description = (string)article["description"],
+                    Url = (string)article["url"],
+                    UrlImage = (string)article["urlToImage"],
+                    PublishedAt = (string)article["publishedAt"]
                 };
 
                 articles.Add(aArticle);
@@ -184,8 +184,8 @@ namespace MyNewsFeedSln.App_Data
             NewsSource source = null;
             foreach (var item in this.ListSources())
             {
-                if (article.id.ToLower().Equals(item.SourceName.ToLower()) ||
-                    article.name.ToLower().Equals(item.SourceName.ToLower()))
+                if (article.Id.ToLower().Equals(item.SourceName.ToLower()) ||
+                    article.Name.ToLower().Equals(item.SourceName.ToLower()))
                 {
                     source = item;
                     break;

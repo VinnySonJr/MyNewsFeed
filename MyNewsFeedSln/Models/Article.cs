@@ -7,13 +7,13 @@ namespace MyNewsFeedSln.Models
 {
     public class Article
     {
-        public string id { get; set; }
-        public string name { get; set; }
-        public string author { get; set; }
-        public string title { get; set; }
-        public string description { get; set; }
-        public string url { get; set; }
-        public string urlImage { get; set; }
-        public string publishedAt { get; set; }
+        public string Id { get; set; }
+        public string Name { get; set; }
+        public string Author { get; set; }
+        public string Title { get; set; }
+        public string Description { get; set; }
+        public string Url { get; set; }
+        public string UrlImage { get; set; }
+        public string PublishedAt { get; set; }
     }
 }

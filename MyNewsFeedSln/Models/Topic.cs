@@ -7,8 +7,8 @@ namespace MyNewsFeedSln.Models
 {
     public class Topic
     {
-        public string name { get; set; }
-        public NewsSource[] newsSources { get; set; }
-        public bool isFavorite { get; set; }
+        public string Name { get; set; }
+        public NewsSource[] NewsSources { get; set; }
+        public bool IsFavorite { get; set; }
     }
 }
