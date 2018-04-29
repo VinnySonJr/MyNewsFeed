@@ -1,0 +1,129 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+.item {
+    text-align: center;
+}
+
+h3 {
+    margin: 0;
+    color: #888;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-size: 50px;
+    background-color: white;
+}
+p{
+    color:white;
+}
+
+.state-icon {
+    left: -5px;
+}
+
+.list-group-item-primary {
+    color: rgb(255, 255, 255);
+    background-color: rgb(66, 139, 202);
+}
+
+.well .list-group {
+    margin-bottom: 0px;
+}
+.centeredBlock {
+    margin-left:120px;
+}
+
+.whiteText{
+    color:white;
+}
+
+.topHeader{
+    margin-top:0px;
+}
+.blackText{
+    color:black;
+    font-size:12px;
+    font-family:Arial;
+}
+
+.h3_Italisized {
+    margin: 0;
+    color: white;
+    padding-top: 100px;
+    padding-bottom: 100px;
+    font-size: 2.0vw;
+    font-family:Arial;
+    font-style:italic;
+    font-weight:bold;
+}
+
+.centeredButton{
+    text-align:center;
+    padding-top:10px;
+    padding-bottom:10px;
+}
+
+.textWrapper {
+    white-space: nowrap;
+    width: 290px;
+    overflow: hidden;
+    text-overflow:ellipsis;
+}
+
+#custom-search-input {
+    margin: 0;
+    margin-top: 0px;
+    padding: 0;
+}
+
+#custom-search-input .search-query {
+        padding-right: 3px;
+        padding-right: 4px \9;
+        padding-left: 3px;
+        padding-left: 4px \9;
+        /* IE7-8 doesn't have border-radius, so don't indent the padding */
+        margin-bottom: 0;
+        -webkit-border-radius: 3px;
+        -moz-border-radius: 3px;
+        border-radius: 3px;
+}
+
+#custom-search-input button {
+        border: 0;
+        background: none;
+        /** belows styles are working good */
+        padding: 2px 5px;
+        margin-top: 2px;
+        position: relative;
+        left: -28px;
+        /* IE7-8 doesn't have border-radius, so don't indent the padding */
+        margin-bottom: 0;
+        -webkit-border-radius: 3px;
+        -moz-border-radius: 3px;
+        border-radius: 3px;
+        color: #D9230F;
+}
+.search-query:focus + button {
+    z-index: 3;
+}

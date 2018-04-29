@@ -1,0 +1,169 @@
+﻿@model IEnumerable<MyNewsFeedSln.Models.NewsSource>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>MyNewsFeed-Home</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script>
+        $(function () {
+            $('.list-group.checked-list-box .list-group-item').each(function () {
+
+                // Settings
+                var $widget = $(this),
+                    $checkbox = $('<input type="checkbox" class="hidden" />'),
+                    color = ($widget.data('color') ? $widget.data('color') : "primary"),
+                    style = ($widget.data('style') == "button" ? "btn-" : "list-group-item-"),
+                    settings = {
+                        on: {
+                            icon: 'glyphicon glyphicon-check'
+                        },
+                        off: {
+                            icon: 'glyphicon glyphicon-unchecked'
+                        }
+                    };
+
+                $widget.css('cursor', 'pointer')
+                $widget.append($checkbox);
+
+                // Event Handlers
+                $widget.on('click', function () {
+                    $checkbox.prop('checked', !$checkbox.is(':checked'));
+                    $checkbox.triggerHandler('change');
+                    updateDisplay();
+                });
+                $checkbox.on('change', function () {
+                    updateDisplay();
+                });
+
+
+                // Actions
+                function updateDisplay() {
+                    var isChecked = $checkbox.is(':checked');
+
+                    // Set the button's state
+                    $widget.data('state', (isChecked) ? "on" : "off");
+
+                    // Set the button's icon
+                    $widget.find('.state-icon')
+                        .removeClass()
+                        .addClass('state-icon ' + settings[$widget.data('state')].icon);
+
+                    // Update the button's color
+                    if (isChecked) {
+                        $widget.addClass(style + color + ' active');
+                    } else {
+                        $widget.removeClass(style + color + ' active');
+                    }
+                }
+
+                // Initialization
+                function init() {
+
+                    if ($widget.data('checked') == true) {
+                        $checkbox.prop('checked', !$checkbox.is(':checked'));
+                    }
+
+                    updateDisplay();
+
+                    // Inject the icon if applicable
+                    if ($widget.find('.state-icon').length == 0) {
+                        $widget.prepend('<span class="state-icon ' + settings[$widget.data('state')].icon + '"></span>');
+                    }
+                }
+                init();
+            });
+
+            $('#get-checked-data').on('click', function (event) {
+                event.preventDefault();
+                var checkedItems = {}, counter = 0;
+                $("#check-list-box li.active").each(function (idx, li) {
+                    checkedItems[counter] = $(li).text();
+                    counter++;
+                });
+                $('#display-json').html(JSON.stringify(checkedItems, null, '\t'));
+            });
+        });
+    </script>
+</head>
+<body>
+    <h3 class="item topHeader">Top Headlines</h3>
+    <div style="text-align:right; margin-bottom:20px; margin-right:50px;">
+        <button class="btn btn-primary" onclick="location.href='@Url.Action("Articles", "NewsFeed")'">View All Articles</button>
+    </div>
+    <div class="container-fluid body-content">
+        <div id="myCarousel" class="carousel slide" data-ride="carousel" style="height:300px">
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner">
+                <div class="item active container-fluid">
+                    <a href=@ViewBag.Articles.ToArray()[0].url>
+                        <div class="row">
+                            <p class="h3_Italisized">@ViewBag.Articles.ToArray()[0].description</p>
+                        </div>
+                    </a>
+                </div>
+                <div class="item">
+                    <a href=@ViewBag.Articles.ToArray()[1].url>
+                        <div class="row">
+                            <p class="h3_Italisized">@ViewBag.Articles.ToArray()[1].description</p>
+                        </div>
+                    </a>
+                </div>
+                <div class="item">
+                    <a href=@ViewBag.Articles.ToArray()[2].url>
+                        <div class="row">
+                            <p class="h3_Italisized">@ViewBag.Articles.ToArray()[2].description</p>
+                        </div>
+                    </a>
+                </div>
+                <div class="item">
+                    <a href=@ViewBag.Articles.ToArray()[3].url>
+                        <div class="row">
+                            <p class="h3_Italisized">@ViewBag.Articles.ToArray()[3].description</p>
+                        </div>
+                    </a>
+                </div>
+                <div class="item">
+                    <a href=@ViewBag.Articles.ToArray()[4].url>
+                        <div class="row">
+                            <p class="h3_Italisized">@ViewBag.Articles.ToArray()[4].description</p>
+                        </div>
+                    </a>
+                </div>
+
+            </div>
+
+            <!-- Left and right controls -->
+            <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+                <span class="glyphicon glyphicon-chevron-left"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="right carousel-control" href="#myCarousel" data-slide="next">
+                <span class="glyphicon glyphicon-chevron-right"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+    </div>
+
+    <h3 class="item">My News Sources </h3>
+
+    <div class="container-fluid" style="background-color:lightgrey;">
+        <div class="item">
+            @foreach (var item in Model)
+            {<a href=@item.SourceLink>
+                    <div class="card" style="width:300px; background-color:white; display:inline-grid; margin-top:10px;margin-bottom:10px;">
+                        <img class="card-img-top" src=@item.SourceImageLink width="300" height="300" alt="Card image cap">
+                        <div class="card-block">
+                            <br />
+                            <p class="card-text blackText">@item.SourceName</p>
+                        </div>
+                    </div>
+                </a>
+            }
+        </div>
+    </div><br /><br />
+</body>
+</html>

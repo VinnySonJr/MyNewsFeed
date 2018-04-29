@@ -1,0 +1,192 @@
+﻿@model IEnumerable<MyNewsFeedSln.Models.NewsSource>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>MyNewsFeed-Sources</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script>
+        $(function () {
+            $('.list-group.checked-list-box .list-group-item').each(function () {
+
+                // Settings
+                var $widget = $(this),
+                    $checkbox = $('<input type="checkbox" class="hidden" />'),
+                    color = ($widget.data('color') ? $widget.data('color') : "primary"),
+                    style = ($widget.data('style') == "button" ? "btn-" : "list-group-item-"),
+                    settings = {
+                        on: {
+                            icon: 'glyphicon glyphicon-check'
+                        },
+                        off: {
+                            icon: 'glyphicon glyphicon-unchecked'
+                        }
+                    };
+
+                $widget.css('cursor', 'pointer')
+                $widget.append($checkbox);
+
+                // Event Handlers
+                $widget.on('click', function () {
+                    $checkbox.prop('checked', !$checkbox.is(':checked'));
+                    $checkbox.triggerHandler('change');
+                    updateDisplay();
+                });
+                $checkbox.on('change', function () {
+                    updateDisplay();
+                });
+
+
+                // Actions
+                function updateDisplay() {
+                    var isChecked = $checkbox.is(':checked');
+
+                    // Set the button's state
+                    $widget.data('state', (isChecked) ? "on" : "off");
+
+                    // Set the button's icon
+                    $widget.find('.state-icon')
+                        .removeClass()
+                        .addClass('state-icon ' + settings[$widget.data('state')].icon);
+
+                    // Update the button's color
+                    if (isChecked) {
+                        $widget.addClass(style + color + ' active');
+                    } else {
+                        $widget.removeClass(style + color + ' active');
+                    }
+                }
+
+                // Initialization
+                function init() {
+
+                    if ($widget.data('checked') == true) {
+                        $checkbox.prop('checked', !$checkbox.is(':checked'));
+                    }
+
+                    updateDisplay();
+
+                    // Inject the icon if applicable
+                    if ($widget.find('.state-icon').length == 0) {
+                        $widget.prepend('<span class="state-icon ' + settings[$widget.data('state')].icon + '"></span>');
+                    }
+                }
+                init();
+            });
+
+            $('#get-checked-data').on('click', function (event) {
+                event.preventDefault();
+                var checkedItems = {}, counter = 0;
+                $("#check-list-box li.active").each(function (idx, li) {
+                    checkedItems[counter] = $(li).text();
+                    counter++;
+                });
+                $('#display-json').html(JSON.stringify(checkedItems, null, '\t'));
+            });
+        });
+    </script>
+</head>
+<body>
+    <h3 class="item topHeader">My News Sources</h3>
+    <div class="container-fluid body-content">
+        <div class="card">
+            <div class="container" style="margin-bottom:20px;">
+                <div class="row" style="margin-bottom:100px; margin-top:20px;">
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="sel1">Select Country:</label>
+                            <select class="form-control" id="sel1">
+                                <option>USA</option>
+                                <option>Great Britain</option>
+                                <option>Canada</option>
+                                <option>Rwanda</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="sel1">Select Category:</label>
+                            <select class="form-control" id="sel1">
+                                <option>All</option>
+                                <option>Business</option>
+                                <option>entertainment</option>
+                                <option>general</option>
+                                <option>health</option>
+                                <option>science</option>
+                                <option>sports</option>
+                                <option>technology</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div id="custom-search-input">
+                            <label for="sel1">Search Newspapers:</label>
+                            <div class="input-group">
+                                <input type="text" class="  search-query form-control" placeholder="Search" />
+                                <span class="input-group-btn">
+                                    <button class="btn btn-danger" type="button">
+                                        <span class=" glyphicon glyphicon-search"></span>
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-3"></div>
+                    <div class="col-sm-3">
+                        <ul id="check-list-box" class="list-group checked-list-box" style="text-align:left">
+                            <li class="list-group-item" data-color="success">View All Newspapers</li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-3">
+                        <ul id="check-list-box" class="list-group checked-list-box" style="text-align:left">
+                            <li class="list-group-item" data-color="success">Show Favorites Only </li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-3"></div>
+                </div>
+            </div>
+            <div class="card-block text-center" style="margin-bottom:20px;">
+                <div>
+                </div>
+                <a href="#" class="btn btn-primary" style="padding-top:10px;padding-bottom:10px;">Submit</a>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid" style="background-color:lightgrey;">
+        <button onclick="location.href='@Url.Action("Create", "NewsFeed")'" class="btn btn-info btn-sm" style="margin-top:20px;margin-left:30px; margin-bottom:10px; text-align:right">
+            <span class="glyphicon glyphicon-plus-sign"></span> Add Newspaper
+        </button>
+        <div class="item">
+            @foreach (var item in Model)
+        {
+            <div class="card" style="width:300px; background-color:white; display:inline-grid; margin-top:10px;margin-bottom:10px;">
+                <a href=@item.SourceLink>
+                    <img class="card-img-top" src=@item.SourceImageLink width="300" height="300" alt="Card image cap">
+                </a>
+                <div class="card-block">
+                    <br />
+                    <a href=@item.SourceLink>
+                        <p class="card-text blackText">@item.SourceName</p>
+                    </a>
+                    <div class="btn btn-info btn-sm" style="margin-bottom:10px;">
+                        <span class="glyphicon glyphicon-star"></span>Mark as Favorite
+                    </div>
+                    <div class="btn btn-info btn-sm" style="margin-bottom:10px;" onclick="location.href='@Url.Action("Edit", "NewsFeed")?id=@item.SourceId'">
+                        Update Source
+                    </div>
+                    <div class="btn btn-info btn-sm" style="margin-bottom:10px;" onclick="location.href='@Url.Action("Delete", "NewsFeed")?id=@item.SourceId'">
+                        <span class="glyphicon glyphicon-remove-circle"></span> Remove Source
+                    </div>
+                </div>
+            </div>
+    }
+        </div>
+    </div>
+    <br /><br />
+</body>
+</html>

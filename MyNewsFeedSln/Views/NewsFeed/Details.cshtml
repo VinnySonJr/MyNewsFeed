@@ -1,0 +1,74 @@
+﻿@model MyNewsFeedSln.Models.NewsSource
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>NewsSource</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.SourceId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SourceId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SourceName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SourceName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SourceLink)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SourceLink)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SourceImageLink)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SourceImageLink)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SourceType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SourceType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SourceLocation)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SourceLocation)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SourceFavorite)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SourceFavorite)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
