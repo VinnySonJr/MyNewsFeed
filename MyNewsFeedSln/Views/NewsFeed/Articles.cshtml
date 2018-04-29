@@ -164,23 +164,23 @@
             {
             <div class="card" style="width:300px; background-color:white; display:inline-grid; margin-top:10px;margin-bottom:10px;">
                 @{
-                    if (item.urlImage == null)
+                    if (item.UrlImage == null)
                     {
-                        <a href=@item.url>
+                        <a href=@item.Url>
                             <img class="card-img-top" src="https://www.wikihow.com/images/3/39/Newspaper-Color-6.jpg" width="300" height="300" alt="Card image capo">
                         </a>
                     }
                     else
                     {
-                        <a href=@item.url>
-                            <img class="card-img-top" src=@item.urlImage width="300" height="300" alt="Card image capo">
+                        <a href=@item.Url>
+                            <img class="card-img-top" src=@item.UrlImage width="300" height="300" alt="Card image capo">
                         </a>
                     }
                 }
-                <a href=@item.url>
+                <a href=@item.Url>
                     <div class="card-block textWrapper">
                         <br />
-                        <p class="card-text blackText">@item.title</p>
+                        <p class="card-text blackText">@item.Title</p>
                     </div>
                 </a>
                 <!--<textarea class="form-control" disabled="true" rows="5" id="comment"></textarea>-->
@@ -188,26 +188,26 @@
                     <div class="well" style="max-height: 300px;overflow: auto;">
                         <ul id="check-list-box" class="list-group checked-list-box" style="text-align:left">
                             @{
-                    if (item.name == "")
+                    if (item.Name == "")
                     {
-                        <li class="list-group-item">Source Name: @item.name</li>
+                        <li class="list-group-item">Source Name: @item.Name</li>
         }
         else
         {
-            <li class="list-group-item">Source Name: @item.id</li>
+            <li class="list-group-item">Source Name: @item.Id</li>
 }
 
-if (item.author == null)
+if (item.Author == null)
 {
             <li class="list-group-item" data-color="success">Author: Unkown </li>
 }
-else if (item.author.Contains("www"))
+else if (item.Author.Contains("www"))
 {
             <li class="list-group-item" data-color="success">Author: Unknown </li>
 }
 else
 {
-            <li class="list-group-item" data-color="success">Author: @item.author </li>
+            <li class="list-group-item" data-color="success">Author: @item.Author </li>
 }
 
                             }
@@ -215,7 +215,7 @@ else
                             <li class="list-group-item" data-color="success">Source Location: </li>
                         </ul>
                         <br />
-                        <div>Published At @item.publishedAt</div>
+                        <div>Published At @item.PublishedAt</div>
                         <br />
                         <button class="btn btn-primary col-xs-12" id="get-checked-data">Add to Favorites</button>
                     </div>
