@@ -5,8 +5,8 @@
 
 /* Set padding to keep content from hitting the edges */
 .body-content {
-    padding-left: 0px;
-    padding-right: 0px;
+    padding-left: 0;
+    padding-right: 0;
 }
 
 /* Override the default bootstrap behavior where horizontal description lists 
@@ -48,7 +48,7 @@ p{
 }
 
 .well .list-group {
-    margin-bottom: 0px;
+    margin-bottom: 0;
 }
 .centeredBlock {
     margin-left:120px;
@@ -59,7 +59,7 @@ p{
 }
 
 .topHeader{
-    margin-top:0px;
+    margin-top:0;
 }
 .blackText{
     color:black;
@@ -93,7 +93,7 @@ p{
 
 #custom-search-input {
     margin: 0;
-    margin-top: 0px;
+    margin-top: 0;
     padding: 0;
 }
 
