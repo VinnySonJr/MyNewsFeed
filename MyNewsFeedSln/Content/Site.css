@@ -127,3 +127,11 @@ p{
 .search-query:focus + button {
     z-index: 3;
 }
+img {
+    object-fit:contain;
+}
+p {
+    text-align: center;
+    padding-left: 20px;
+    padding-right: 20px;
+}

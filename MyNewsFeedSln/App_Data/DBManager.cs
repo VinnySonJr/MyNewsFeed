@@ -193,5 +193,10 @@ namespace MyNewsFeedSln.App_Data
             }
             return source;
         }
+
+        public List<Article> GetArticlesGivenUrl()
+        {
+            return null;
+        }
     }
 }

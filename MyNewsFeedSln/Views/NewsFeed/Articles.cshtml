@@ -188,28 +188,27 @@
                     <div class="well" style="max-height: 300px;overflow: auto;">
                         <ul id="check-list-box" class="list-group checked-list-box" style="text-align:left">
                             @{
-                    if (item.Name == "")
-                    {
-                        <li class="list-group-item">Source Name: @item.Name</li>
-        }
-        else
-        {
-            <li class="list-group-item">Source Name: @item.Id</li>
-}
+                                if (item.Name == "")
+                                {
+                                    <li class="list-group-item">Source Name: @item.Name</li>
+                                }
+                                else
+                                {
+                                    <li class="list-group-item">Source Name: @item.Id</li>
+                                }
 
-if (item.Author == null)
-{
-            <li class="list-group-item" data-color="success">Author: Unkown </li>
-}
-else if (item.Author.Contains("www"))
-{
-            <li class="list-group-item" data-color="success">Author: Unknown </li>
-}
-else
-{
-            <li class="list-group-item" data-color="success">Author: @item.Author </li>
-}
-
+                                if (item.Author == null)
+                                {
+                                    <li class="list-group-item" data-color="success">Author: Unkown </li>
+                                }
+                                else if (item.Author.Contains("www"))
+                                {
+                                    <li class="list-group-item" data-color="success">Author: Unknown </li>
+                                }
+                                else
+                                {
+                                    <li class="list-group-item" data-color="success">Author: @item.Author </li>
+                                }
                             }
                             <li class="list-group-item" data-color="success">Category</li>
                             <li class="list-group-item" data-color="success">Source Location: </li>
