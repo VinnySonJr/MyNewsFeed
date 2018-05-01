@@ -194,8 +194,31 @@ namespace MyNewsFeedSln.App_Data
             return source;
         }
 
-        public List<Article> GetArticlesGivenUrl()
+        public List<Article> GetArticlesGivenUrl(string uri)
         {
+            string pageHtmlText = "";
+            List<String> linesWithImageLinks = new List<string>();
+            char newLine = '\n';
+
+            using (var client = new WebClient())
+            {
+                pageHtmlText = client.DownloadString(new Uri(uri));
+            }
+
+            string[] pageTextLines = pageHtmlText.Split(newLine);
+            
+            foreach (var line in pageTextLines)
+            {
+                if(line.Contains("<a") && (line.Contains("<img") && line.Contains("href")))
+                {
+                    linesWithImageLinks.Add(line);
+                }
+            }
+            Console.WriteLine(linesWithImageLinks.ToArray()[0]);
+            foreach (var line in linesWithImageLinks)
+            {
+
+            }
             return null;
         }
     }
