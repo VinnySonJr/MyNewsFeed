@@ -199,6 +199,8 @@ namespace MyNewsFeedSln.App_Data
         {
             string pageHtmlText = "";
             char newLine = '\n';
+
+            List<Article> extractedArticles = new List<Article>();
             List<String> linesWithImageLinks = new List<string>();
            
             using (var client = new WebClient())
@@ -225,17 +227,43 @@ namespace MyNewsFeedSln.App_Data
                         "<html>" +
                             line+
                         "</html>"));
-                    //Console.WriteLine(line);
-                    Console.WriteLine("Image: " + htmlDocument.GetElementsByTagName("img").Item(0).Attributes.GetNamedItem("src").Value);
-                    Console.WriteLine("Link: " + htmlDocument.GetElementsByTagName("a").Item(0).Attributes.GetNamedItem("href").Value);
+            
+                    string imageInArticle = htmlDocument.GetElementsByTagName("img").Item(0).Attributes.GetNamedItem("src").Value;
+                    string linkToArticle = htmlDocument.GetElementsByTagName("a").Item(0).Attributes.GetNamedItem("href").Value;
+                    string titleOfArticle = htmlDocument.GetElementsByTagName("a").Item(0).InnerText;
+                    string hostName = (new Uri(uri)).Host;
+
+                    if (!linkToArticle.Contains(hostName))
+                    {
+                        linkToArticle = "http://" + hostName + "/" + linkToArticle.TrimStart('/');
+                    }
+
+                    if (titleOfArticle.Equals(""))
+                    {
+                        titleOfArticle = linkToArticle.Split('/').Last();
+                    }
+                    
+                    Article article = new Article()
+                    {
+                        Url = linkToArticle,
+                        UrlImage = imageInArticle,
+                        Title = titleOfArticle,
+                        Author = "unknown",
+                        Description = titleOfArticle,
+                        Name = hostName,
+                        PublishedAt = GetTodayDateString(),
+                        
+                    };
+                    if (!(article.Title.Length<2))
+                        extractedArticles.Add(article);
                 }
                 catch (Exception)
                 {
                      
                 }               
             }
-            //Console.WriteLine(htmlDocument.InnerXml);
-            return null;
+            Console.WriteLine(extractedArticles.Count);
+            return extractedArticles;
         }
     }
 }

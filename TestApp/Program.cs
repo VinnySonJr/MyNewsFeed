@@ -25,7 +25,7 @@ namespace TestApp
         {
             DBManager dataManager = new DBManager();
             //Console.WriteLine(dataManager.ListSources().First().SourceName);
-            Console.WriteLine(dataManager.GetAllArticles().Last().UrlImage);
+            //Console.WriteLine(dataManager.GetAllArticles().Last().UrlImage);
            // Console.WriteLine(dataManager.GetArticlesGivenCategory("Technology").First().name);
            // Console.WriteLine(dataManager.GetArticlesGivenCategoryAndLocation("Technology","US").First().name);
            // Console.WriteLine(dataManager.GetNewsSourceGivenArticle(dataManager.GetAllArticles().First()).SourceName);
@@ -40,7 +40,7 @@ namespace TestApp
                 SourceLocation = "Rwanda",
                 SourceFavorite = false
             };
-            dataManager.GetArticlesGivenUrl("http://www.msnbc.com/");
+            dataManager.GetArticlesGivenUrl("http://igihe.com/");
         }
         
     }
