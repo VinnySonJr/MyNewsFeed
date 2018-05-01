@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
 using System.Net;
-using System.Web;
+using System.Xml;
 using Dapper;
 using MyNewsFeedSln.Models;
 using Newtonsoft.Json.Linq;
@@ -197,14 +198,14 @@ namespace MyNewsFeedSln.App_Data
         public List<Article> GetArticlesGivenUrl(string uri)
         {
             string pageHtmlText = "";
-            List<String> linesWithImageLinks = new List<string>();
             char newLine = '\n';
-
+            List<String> linesWithImageLinks = new List<string>();
+           
             using (var client = new WebClient())
             {
                 pageHtmlText = client.DownloadString(new Uri(uri));
             }
-
+          
             string[] pageTextLines = pageHtmlText.Split(newLine);
             
             foreach (var line in pageTextLines)
@@ -214,11 +215,26 @@ namespace MyNewsFeedSln.App_Data
                     linesWithImageLinks.Add(line);
                 }
             }
-            Console.WriteLine(linesWithImageLinks.ToArray()[0]);
+
+            XmlDocument htmlDocument = new XmlDocument();
             foreach (var line in linesWithImageLinks)
             {
-
+                try
+                {
+                    htmlDocument.Load(new StringReader(
+                        "<html>" +
+                            line+
+                        "</html>"));
+                    //Console.WriteLine(line);
+                    Console.WriteLine("Image: " + htmlDocument.GetElementsByTagName("img").Item(0).Attributes.GetNamedItem("src").Value);
+                    Console.WriteLine("Link: " + htmlDocument.GetElementsByTagName("a").Item(0).Attributes.GetNamedItem("href").Value);
+                }
+                catch (Exception)
+                {
+                     
+                }               
             }
+            //Console.WriteLine(htmlDocument.InnerXml);
             return null;
         }
     }

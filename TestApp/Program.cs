@@ -40,8 +40,7 @@ namespace TestApp
                 SourceLocation = "Rwanda",
                 SourceFavorite = false
             };
-            dataManager.GetArticlesGivenUrl("http://abcnews.go.com/US/striking-arizona-teachers-cover-capitol-red/story?id=54826629");
-
+            dataManager.GetArticlesGivenUrl("http://www.msnbc.com/");
         }
         
     }
