@@ -88,15 +88,37 @@ namespace MyNewsFeedSln.App_Data
         {
             string currentCountryCode = GetUserCountryLocation();
             string todayDate = GetTodayDateString();
+            List<Article> allArticles = new List<Article>();
+            List<string> visitedHosts = new List<string>();
 
             var url = "https://newsapi.org/v2/top-headlines?" +
             "country=" + currentCountryCode + "&" +
             "from=" + todayDate + "&" +
             "to=" + todayDate + "&" +
-
             "apiKey="+newsApiKey;
 
-            return RequestArticles(url);
+            foreach (var article in RequestArticles(url))
+            {
+                visitedHosts.Add((new Uri(article.Url)).Host);
+                allArticles.Add(article);
+            }
+            
+            foreach (var source in ListSources())
+            {
+                try
+                {
+                    if (!visitedHosts.Contains((new Uri(source.SourceLink)).Host))
+                    {
+                        List<Article> articles = GetArticlesGivenUrl(source.SourceLink);
+                        allArticles.AddRange(articles);
+                    }
+                }
+                catch (Exception)
+                {
+                    //The link to source does not work
+                }
+            }
+            return allArticles;
         }
 
         public List<Article> GetArticlesGivenCategory(string type)
