@@ -260,6 +260,11 @@ namespace MyNewsFeedSln.App_Data
                         linkToArticle = "http://" + hostName + "/" + linkToArticle.TrimStart('/');
                     }
 
+                    if (!imageInArticle.Contains("www."))
+                    {
+                        imageInArticle = "http://" + hostName + "/" + linkToArticle.TrimStart('/');
+                    }
+
                     if (titleOfArticle.Equals(""))
                     {
                         titleOfArticle = linkToArticle.Split('/').Last();
