@@ -260,9 +260,9 @@ namespace MyNewsFeedSln.App_Data
                         linkToArticle = "http://" + hostName + "/" + linkToArticle.TrimStart('/');
                     }
 
-                    if (!imageInArticle.Contains("www."))
+                    if (!((imageInArticle.Replace("http","").Replace("www","")).Substring(0,20).Contains(".")))
                     {
-                        imageInArticle = "http://" + hostName + "/" + linkToArticle.TrimStart('/');
+                        imageInArticle = "http://" + hostName + "/" + imageInArticle.TrimStart('/');
                     }
 
                     if (titleOfArticle.Equals(""))
@@ -281,7 +281,7 @@ namespace MyNewsFeedSln.App_Data
                         PublishedAt = GetTodayDateString(),
                         
                     };
-                    if (!(article.Title.Length<2))
+                    if (!(article.Title.Length<2) && (article.UrlImage.Contains("jpg")|| article.UrlImage.Contains("jpeg")|| article.UrlImage.Contains("png")))
                         extractedArticles.Add(article);
                 }
                 catch (Exception)

@@ -164,7 +164,7 @@
             {
             <div class="card" style="width:300px; background-color:white; display:inline-grid; margin-top:10px;margin-bottom:10px;">
                 @{
-                    if (item.UrlImage == null || !item.UrlImage.Contains("http"))
+                    if (item.UrlImage == null)
                     {
                         <a href=@item.Url>
                             <img class="card-img-top" src="https://www.wikihow.com/images/3/39/Newspaper-Color-6.jpg" width="300" height="300" alt="Card image capo">
