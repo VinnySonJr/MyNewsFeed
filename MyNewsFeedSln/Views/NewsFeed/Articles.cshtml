@@ -163,20 +163,9 @@
             @foreach (var item in Model)
             {
             <div class="card" style="width:300px; background-color:white; display:inline-grid; margin-top:10px;margin-bottom:10px;">
-                @{
-                    if (item.UrlImage == null)
-                    {
-                        <a href=@item.Url>
-                            <img class="card-img-top" src="https://www.wikihow.com/images/3/39/Newspaper-Color-6.jpg" width="300" height="300" alt="Card image capo">
-                        </a>
-                    }
-                    else
-                    {
-                        <a href=@item.Url>
-                            <img class="card-img-top" src=@item.UrlImage width="300" height="300" alt="Card image capo">
-                        </a>
-                    }
-                }
+                <a href=@item.Url>
+                    <img class="card-img-top" src=@item.UrlImage width="300" height="300" alt="Card image capo">
+                </a>
                 <a href=@item.Url>
                     <div class="card-block textWrapper">
                         <br />
@@ -187,29 +176,8 @@
                 <div>
                     <div class="well" style="max-height: 300px;overflow: auto;">
                         <ul id="check-list-box" class="list-group checked-list-box" style="text-align:left">
-                            @{
-                                if (item.Name == "")
-                                {
-                                    <li class="list-group-item">Source Name: @item.Name</li>
-                                }
-                                else
-                                {
-                                    <li class="list-group-item">Source Name: @item.Name</li>
-                                }
-
-                                if (item.Author == null)
-                                {
-                                    <li class="list-group-item" data-color="success">Author: Unkown </li>
-                                }
-                                else if (item.Author.Contains("www"))
-                                {
-                                    <li class="list-group-item" data-color="success">Author: Unknown </li>
-                                }
-                                else
-                                {
-                                    <li class="list-group-item" data-color="success">Author: @item.Author </li>
-                                }
-                            }
+                            <li class="list-group-item">Source Name: @item.Name</li>
+                            <li class="list-group-item" data-color="success">Author: @item.Author </li>
                             <li class="list-group-item" data-color="success">Category</li>
                             <li class="list-group-item" data-color="success">Source Location: </li>
                         </ul>

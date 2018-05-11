@@ -172,7 +172,12 @@ namespace MyNewsFeedSln.App_Data
                     UrlImage = (string)article["urlToImage"],
                     PublishedAt = (string)article["publishedAt"]
                 };
-
+                if (aArticle.Author == null)
+                    aArticle.Author = "Unkown";
+                else if (aArticle.Author.Contains("www"))
+                {
+                    aArticle.Author = "Unkown";
+                }
                 articles.Add(aArticle);
             }
             return articles;
@@ -269,7 +274,11 @@ namespace MyNewsFeedSln.App_Data
                     {
                         titleOfArticle = linkToArticle.Split('/').Last();
                     }
-                    
+                    if (imageInArticle.Equals(""))
+                    {
+                        titleOfArticle = "https://www.wikihow.com/images/3/39/Newspaper-Color-6.jpg";
+                    }
+
                     Article article = new Article()
                     {
                         Url = linkToArticle,
