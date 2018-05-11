@@ -101,20 +101,11 @@
                  while (count<5)
                  {
                     <div class="card" style="width:300px; background-color:lightgrey; display:inline-grid; margin-top:10px;margin-bottom:10px; margin-right:20px;}">
-                        @{
-                            if (ViewBag.Articles.ToArray()[count % 5].UrlImage == null)
-                            {
-                                <a href=@ViewBag.Articles.ToArray()[count%5].Url>
-                                    <img class="card-img-top" src="https://www.wikihow.com/images/3/39/Newspaper-Color-6.jpg" width="300" height="300" alt="Card image capo">
-                                </a>
-                            }
-                            else
-                            {
-                                <a href=@ViewBag.Articles.ToArray()[count%5].Url>
-                                    <img class="card-img-top" src=@ViewBag.Articles.ToArray()[count%5].UrlImage width="300" height="300" alt="Card image capo">
-                                </a>
-                            }
-                        }
+
+                        <a href=@ViewBag.Articles.ToArray()[count%5].Url>
+                            <img class="card-img-top" src=@ViewBag.Articles.ToArray()[count%5].UrlImage width="300" height="300" alt="Card image capo">
+                        </a>
+
                         <a href=@ViewBag.Articles.ToArray()[count%5].Url>
                             <div class="card-block textWrapper">
                                 <p class="card-text blackText">@ViewBag.Articles.ToArray()[count % 5].Title</p>
